@@ -1,15 +1,6 @@
 import pygame
 from settings import Settings
-
-class Ship:
-    def __init__(self, screen):
-        ship_image = pygame.image.load('./images/spaceship.png')
-        # self.ship_image = pygame.transform.scale(ship_image, (40,200))
-        self.ship_image = pygame.transform.scale_by(ship_image, .07)
-        self.screen = screen
-        
-    def blitme(self):    
-        self.screen.blit(self.ship_image, (100,200))
+from ship import Ship
 
 
 class Main:
@@ -45,7 +36,10 @@ class Main:
             for event in events:
                 if event.type == pygame.QUIT:
                     pygame.quit()
-                    return 
+                    return
+                elif event.type == pygame.KEYDOWN: 
+                    if event.key == pygame.K_RIGHT:
+                        self.ship.ship_rect.x += 10
                 
             self.screen.fill(self.settings.bg_color) #this is the backaground
             self.render_fps(self.screen, self.clock, self.font)
